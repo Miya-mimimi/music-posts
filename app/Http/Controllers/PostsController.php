@@ -47,6 +47,11 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        // バリデーション
+        $request->validate([
+            'content' => 'required|max:255',
+        ]);
+        
         // 投稿を作成
         $post = new Post;
         $post->content = $request->content;
@@ -99,6 +104,11 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // バリデーション
+        $request->validate([
+            'content' => 'required|max:255',
+        ]);
+        
         // idの値で投稿を検索して取得
         $post = Post::findOrFail($id);
         
