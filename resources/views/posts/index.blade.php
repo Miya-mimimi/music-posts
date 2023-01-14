@@ -14,7 +14,7 @@
                     <th>ユーザー名</th>
                     <th>募集パート</th>
                     <th>納期</th>
-                    <th>コメント</th>
+                    <th style="width:300px;">コメント</th>
                     <th>サンプル音源</th>
                 </tr>
             </thead>
@@ -24,8 +24,8 @@
                     <td><a class="link link-hover text-info" href="{{ route('posts.show', $post->id) }}">{{ $post->id }}</a></td>
                     <td>{{-- $post->name --}}</td>
                     <td>{{-- $post->part --}}</td>
-                    <td>{{-- $post->limit_at --}}</td>
-                    <td>{{ $post->content }}</td>
+                    <td>{{ $post->deadline_at }}</td>
+                    <td class="text-ellipsis">{{ $post->content }}</td>
                     <td>{{-- $post->music_file --}}</td>
                 </tr>
                 @endforeach

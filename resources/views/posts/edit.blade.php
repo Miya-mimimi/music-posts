@@ -23,10 +23,10 @@
                 </div>
                 
                 <div class="form-control my-4">
-                    <label for="" class="label">
+                    <label for="deadline_at" class="label">
                         <span class="label-text">納期:</span>
                     </label>
-                    <input type="text" name="" value="" class="input input-bordered w-full">
+                    <input type="date" name="deadline_at" value="{{ $post->deadline_at }}" class="input input-bordered w-full">
                 </div>
                 
                 <div class="form-control my-4">

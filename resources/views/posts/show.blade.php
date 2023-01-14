@@ -24,7 +24,7 @@
         
         <tr>
             <th>納期</th>
-            <td></td>
+            <td>{{ $post->deadline_at }}</td>
         </tr>
         
         <tr>
