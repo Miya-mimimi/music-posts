@@ -49,12 +49,13 @@ class PostsController extends Controller
     {
         // バリデーション
         $request->validate([
-            'deadline_at' => 'required|max:255',
+            'deadline_at' => 'required|max:10',
             'content' => 'required|max:255',
         ]);
         
         // 投稿を作成
         $post = new Post;
+        $post->section_part = $request->section_part;
         $post->deadline_at = $request->deadline_at;
         $post->content = $request->content;
         $post->save();
@@ -108,7 +109,7 @@ class PostsController extends Controller
     {
         // バリデーション
         $request->validate([
-            'deadline_at' => 'required|max:255',
+            'deadline_at' => 'required|max:10',
             'content' => 'required|max:255',
         ]);
         
@@ -116,6 +117,7 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         
         //　投稿を更新
+        $post->section_part = $request->section_part;
         $post->deadline_at = $request->deadline_at;
         $post->content = $request->content;
         $post->save();

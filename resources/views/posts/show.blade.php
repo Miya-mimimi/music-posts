@@ -19,7 +19,7 @@
         
         <tr>
             <th>募集パート</th>
-            <td></td>
+            <td>{{ $post->section_part }}</td>
         </tr>
         
         <tr>

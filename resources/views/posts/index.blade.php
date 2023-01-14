@@ -23,7 +23,7 @@
                 <tr>
                     <td><a class="link link-hover text-info" href="{{ route('posts.show', $post->id) }}">{{ $post->id }}</a></td>
                     <td>{{-- $post->name --}}</td>
-                    <td>{{-- $post->part --}}</td>
+                    <td>{{ $post->section_part }}</td>
                     <td>{{ $post->deadline_at }}</td>
                     <td class="text-ellipsis">{{ $post->content }}</td>
                     <td>{{-- $post->music_file --}}</td>

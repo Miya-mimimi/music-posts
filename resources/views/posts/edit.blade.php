@@ -12,13 +12,13 @@
             @method('PUT')
                 
                 <div class="form-control my-4">
-                    <label for="" class="label">
+                    <label for="section_part" class="label">
                         <span class="label-text">募集パート:</span>
                     </label>
-                    <select name="" class="input input-bordered w-full">
-                        <option value="guitter">ギター</option>
-                        <option value="bass">ベース</option>
-                        <option value="drum">ドラム</option>
+                    <select name="section_part" class="input input-bordered w-full">
+                        <option value="ギター">ギター</option>
+                        <option value="ベース">ベース</option>
+                        <option value="ドラム">ドラム</option>
                     </select>
                 </div>
                 
