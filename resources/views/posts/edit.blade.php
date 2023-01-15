@@ -19,6 +19,7 @@
                         <option value="ギター">ギター</option>
                         <option value="ベース">ベース</option>
                         <option value="ドラム">ドラム</option>
+                        <option value="その他">その他</option>
                     </select>
                 </div>
                 
@@ -40,7 +41,8 @@
                     <label for="content" class="label">
                         <span class="label-text">コメント:</span>
                     </label>
-                    <input type="text" name="content" value="{{ $post->content }}" class="input input-bordered w-full">
+                    <textarea name="content" placeholder="曲の雰囲気や募集の要望を入力してください。募集パートでその他を選択した場合、具体的に募集パートを記載してください" value="{{ $post->content }}" 
+                           class="input input-bordered h-48 w-full"></textarea>
                 </div>
 
             <button type="submit" class="btn btn-primary btn-outline">更新</button>

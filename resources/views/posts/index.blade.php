@@ -7,14 +7,14 @@
     </div>
     
     @if (isset($posts))
-        <table class="table table-zebra w-full my-4">
+        <table class="table table-fixed table-zebra w-full my-4">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>ユーザー名</th>
                     <th>募集パート</th>
                     <th>納期</th>
-                    <th style="width:300px;">コメント</th>
+                    <th>コメント</th>
                     <th>サンプル音源</th>
                 </tr>
             </thead>
@@ -25,7 +25,7 @@
                     <td>{{-- $post->name --}}</td>
                     <td>{{ $post->section_part }}</td>
                     <td>{{ $post->deadline_at }}</td>
-                    <td class="text-ellipsis">{{ $post->content }}</td>
+                    <td class="truncate">{{ $post->content }}</td>
                     <td>{{-- $post->music_file --}}</td>
                 </tr>
                 @endforeach
