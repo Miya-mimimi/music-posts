@@ -61,7 +61,7 @@ class PostsController extends Controller
         $post->save();
         
         // トップページへリダイレクトさせる
-        return redirect('/');
+        return redirect('/dashboard');
     }
 
     /**
@@ -123,7 +123,7 @@ class PostsController extends Controller
         $post->save();
         
         // トップページへリダイレクトさせる
-        return redirect('/');
+        return redirect('/dashboard');
     }
 
     /**
@@ -141,6 +141,6 @@ class PostsController extends Controller
         $post->delete();
         
         // トップページへリダイレクトさせる
-        return redirect('/');
+        return redirect('/dashboard');
     }
 }
