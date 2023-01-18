@@ -7,7 +7,7 @@
     </div>
 
     <div class="flex justify-center">
-        <form method="POST" action="{{ route('posts.store') }}" class="w-1/2">
+        <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data" class="w-1/2">
             @csrf
                 
                 <div class="form-control my-4">
@@ -30,10 +30,10 @@
                 </div>
                 
                 <div class="form-control my-4">
-                    <label for="" class="label">
+                    <label for="music_file" class="label">
                         <span class="label-text">サンプル音源:</span>
                     </label>
-                    <input type="text" name="" placeholder="サンプル音源を貼り付けてください" class="input input-bordered w-full">
+                    <input type="file" name="music_file" accept="audio/*" placeholder="サンプル音源をアップロードしてください">
                 </div>
                 
                 <div class="form-control my-4">

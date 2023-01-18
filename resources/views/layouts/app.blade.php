@@ -9,11 +9,11 @@
     </head>
 
     <body>
-
+        
         {{-- ナビゲーションバー --}}
         @include('commons.navbar')
 
-        <div class="container mx-auto">
+        <div class="container-none mx-auto">
             {{-- エラーメッセージ --}}
             @include('commons.error_messages')
 

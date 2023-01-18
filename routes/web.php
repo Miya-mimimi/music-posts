@@ -17,9 +17,7 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/', [PostsController::class, 'index']);
 
 Route::get('/dashboard', [PostsController::class, 'index'])->middleware(['auth'])->name('dashboard');
 

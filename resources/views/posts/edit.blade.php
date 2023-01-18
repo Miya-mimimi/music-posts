@@ -31,10 +31,10 @@
                 </div>
                 
                 <div class="form-control my-4">
-                    <label for="" class="label">
+                    <label for="music_file" class="label">
                         <span class="label-text">サンプル音源:</span>
                     </label>
-                    <input type="text" name="" value="" class="input input-bordered w-full">
+                    <input type="file" name="music_file" accept="audio/*" placeholder="サンプル音源をアップロードしてください">
                 </div>
                 
                 <div class="form-control my-4">

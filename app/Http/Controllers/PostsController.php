@@ -49,16 +49,28 @@ class PostsController extends Controller
     {
         // バリデーション
         $request->validate([
-            'deadline_at' => 'required|max:10',
+            'deadline_at' => 'required',
             'content' => 'required|max:255',
         ]);
         
-        // 投稿を作成
-        $post = new Post;
-        $post->section_part = $request->section_part;
-        $post->deadline_at = $request->deadline_at;
-        $post->content = $request->content;
-        $post->save();
+        
+        $file = $request->file('music_file');
+        if ($request->hasFile('music_file')) {
+            $path = \Storage::put('/public', $file);
+            $music_file = explode('/', $path)[1];
+        } else {
+            $music_file = null;
+        }
+        
+        
+        
+        // 認証済みユーザの投稿を作成
+        $request->user()->posts()->create([
+            'section_part' => $request->section_part,
+            'deadline_at' => $request->deadline_at,
+            'music_file' => $music_file,
+            'content' => $request->content,
+        ]);
         
         // トップページへリダイレクトさせる
         return redirect('/dashboard');
@@ -109,7 +121,7 @@ class PostsController extends Controller
     {
         // バリデーション
         $request->validate([
-            'deadline_at' => 'required|max:10',
+            'deadline_at' => 'required',
             'content' => 'required|max:255',
         ]);
         
@@ -135,10 +147,13 @@ class PostsController extends Controller
     public function destroy($id)
     {
         // idの値で投稿を検索して取得
-        $post = Post::findOrFail($id);
+        $post = \App\Models\Post::findOrFail($id);
         
-        // 投稿を削除
-        $post->delete();
+        // 認証済みユーザがその投稿の所有者である場合は投稿を削除
+        if (\Auth::id() === $post->user_id) {
+            $post->delete();
+            return redirect('/dashboard')->with('success','Delete Successful');
+        }
         
         // トップページへリダイレクトさせる
         return redirect('/dashboard');
