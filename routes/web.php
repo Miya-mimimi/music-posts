@@ -37,6 +37,6 @@ require __DIR__.'/auth.php';
 Route::group(['middleware' => ['auth']], function () {
     
     Route::resource('posts', PostsController::class);
-    Route::resource('users', UsersController::class, ['only' => ['index', 'show']]);
+    Route::resource('users', UsersController::class);
     
 });

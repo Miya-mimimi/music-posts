@@ -29,7 +29,7 @@
                 @foreach ($posts as $post)
                 <tr>
                     <td><a class="link link-hover text-info" href="{{ route('posts.show', $post->id) }}">{{ $post->id }}</a></td>
-                    <td><a class="link link-hover text-info" href="#">{{ $post->user->name }}</a></td>
+                    <td><a class="link link-hover text-info" href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a></td>
                     <td>{{ $post->section_part }}</td>
                     <td>{{ $post->deadline_at }}</td>
                     <td class="w-1 truncate">{{ $post->content }}</td>
