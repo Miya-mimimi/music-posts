@@ -13,15 +13,26 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // 投稿の一覧を取得
-        $posts = Post::all();
+        if (\Auth::check()) {
+            
+            // categoryで選択された値を$keywordに格納
+            $keyword = $request->input('keyword');
+            
+            if ($keyword == null) {
+                $posts = Post::all();
+                return view('posts.index', ['posts' => $posts]);
+            }
+            
+            $query = Post::query();
+            
+            $query->where('section_part', "{$keyword}");
+            
+            $posts = $query->get();
+            return view('posts.index', compact('posts', 'keyword'));
+        }
         
-        // 投稿一覧ビューでそれを表示
-        return view('posts.index', [
-            'posts' => $posts,
-        ]);
     }
 
     /**
@@ -37,6 +48,8 @@ class PostsController extends Controller
         return view('posts.create', [
             'post' => $post,
         ]);
+        
+        return redirect('/dashboard');
     }
 
     /**
@@ -50,6 +63,7 @@ class PostsController extends Controller
         // バリデーション
         $request->validate([
             'deadline_at' => 'required',
+            'music_file' => 'required',
             'content' => 'required|max:255',
         ]);
         
@@ -86,11 +100,12 @@ class PostsController extends Controller
     {
         // idの値で投稿を検索して取得
         $post = Post::findOrFail($id);
-        
-        // 投稿一覧ビューでそれを表示
+            
         return view('posts.show', [
             'post' => $post,
         ]);
+            
+        
     }
 
     /**
@@ -104,10 +119,14 @@ class PostsController extends Controller
         // idの値で投稿を検索して取得
         $post = Post::findOrFail($id);
         
-        // 投稿編集ビューでそれを表示
-        return view('posts.edit', [
-            'post' => $post,
-        ]);
+        if (\Auth::id() === $post->user_id) {
+            return view('posts.edit', [
+                'post' => $post,
+            ]);
+        }
+        else {
+            return redirect('/dashboard');
+        }
     }
 
     /**
@@ -122,17 +141,29 @@ class PostsController extends Controller
         // バリデーション
         $request->validate([
             'deadline_at' => 'required',
+            'music_file' => 'required',
             'content' => 'required|max:255',
         ]);
         
         // idの値で投稿を検索して取得
         $post = Post::findOrFail($id);
         
-        //　投稿を更新
-        $post->section_part = $request->section_part;
-        $post->deadline_at = $request->deadline_at;
-        $post->content = $request->content;
-        $post->save();
+        $file = $request->file('music_file');
+        if ($request->hasFile('music_file')) {
+            $path = \Storage::put('/public', $file);
+            $music_file = explode('/', $path)[1];
+        } else {
+            $music_file = null;
+        }
+        
+        if (\Auth::id() === $post->user_id) {
+            //　投稿を更新
+            $post->section_part = $request->section_part;
+            $post->deadline_at = $request->deadline_at;
+            $post->music_file = $music_file;
+            $post->content = $request->content;
+            $post->save();
+        }
         
         // トップページへリダイレクトさせる
         return redirect('/dashboard');

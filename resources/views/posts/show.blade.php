@@ -6,11 +6,11 @@
         <h2>投稿詳細</h2>
     </div>
 
-    <table class="table w-full my-4">
+    <table class="table w-1/2 my-4">
         
         <tr>
             <th>ユーザー名</th>
-            <td><a class="link link-hover text-info" Href="#">{{ $post->user->name }}</a></td>
+            <td><a class="link link-hover text-info" Href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a></td>
         </tr>
         
         <tr>
@@ -31,7 +31,7 @@
         </tr>
         
         <tr>
-            <th>メッセージ</th>
+            <th>コメント</th>
             <td>{{ $post->content }}</td>
         </tr>
     </table>
@@ -51,6 +51,7 @@
                     onclick="return confirm('id = {{ $post->id }} の投稿を削除します。よろしいですか？')">削除</button>
             </form>
         @endif
+        
     </div>
 
 @endsection

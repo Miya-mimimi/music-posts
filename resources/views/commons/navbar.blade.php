@@ -3,6 +3,23 @@
         {{-- トップページへのリンク --}}
         <div class="flex-1">
             <h1><a class="btn btn-ghost normal-case text-xl" href="/dashboard">クリエイターマッチング</a></h1>
+            <form method="GET" action="{{ route('posts.index') }}" class="flex w-1/4">
+                @csrf
+                
+                <select name="keyword" class="text-black input input-bordered ml-2 w-full">
+                    <option value="">すべての募集</option>
+                    <option value="ギター">ギター</option>
+                    <option value="ベース">ベース</option>
+                    <option value="ドラム">ドラム</option>
+                    <option value="その他">その他</option>
+                </select>
+                
+                <button type="submit" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                        <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                </svg>
+                </button>
+            </from>
         </div>
         
         <div class="flex-none">

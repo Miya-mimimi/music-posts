@@ -42,7 +42,7 @@
         </table>
     @endif
     
-    {{-- 投稿作成ページへのリンク --}}
-    <a class="btn btn-primary" href="{{ route('posts.create') }}">新規募集</a>
+    {{-- 投稿作成ページへのリンク<a class="btn btn-primary" href="{{ route('posts.create') }}">新規募集</a> --}}
+    
 
 @endsection

@@ -3,11 +3,11 @@
 @section('content')
 
     <div class="prose ml-4">
-        <h2>id: {{ $post->id }} の投稿編集</h2>
+        <h2>投稿編集</h2>
     </div>
 
     <div class="flex justify-center">
-        <form method="POST" action="{{ route('posts.update', $post->id) }}" class="w-1/2">
+        <form method="POST" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data" class="w-1/2">
             @csrf
             @method('PUT')
                 
@@ -34,14 +34,14 @@
                     <label for="music_file" class="label">
                         <span class="label-text">サンプル音源:</span>
                     </label>
-                    <input type="file" name="music_file" accept="audio/*" placeholder="サンプル音源をアップロードしてください">
+                    <input type="file" name="music_file" accept="audio/*"}}">
                 </div>
                 
                 <div class="form-control my-4">
                     <label for="content" class="label">
                         <span class="label-text">コメント:</span>
                     </label>
-                    <textarea name="content" placeholder="曲の雰囲気や募集の要望を入力してください。募集パートでその他を選択した場合、具体的に募集パートを記載してください" value="{{ $post->content }}" 
+                    <textarea name="content" value="{{ $post->content }}" 
                            class="input input-bordered h-48 w-full"></textarea>
                 </div>
 
