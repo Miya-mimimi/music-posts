@@ -6,7 +6,7 @@
             <div class="max-w-md mb-10">
                 <h2>クリエイターマッチングアプリへようこそ！</h2>
                 {{-- ユーザ登録ページへのリンク --}}
-                <a class="btn btn-primary btn-lg normal-case" href="{{ route('register') }}">ログイン</a>
+                <a class="btn btn-primary btn-lg normal-case" href="{{ route('login') }}">ログイン</a>
             </div>
         </div>
     </div>

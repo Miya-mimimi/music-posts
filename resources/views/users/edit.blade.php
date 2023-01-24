@@ -7,9 +7,16 @@
     </div>
 
     <div class="flex justify-center">
-        <form method="POST" action="{{ route('users.update', $user->id) }}" class="w-1/2">
+        <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data" class="w-1/2">
             @csrf
             @method('PUT')
+                
+                <div class="form-control my-4">
+                    <label for="image" class="label">
+                        <span class="label-text">プロフィール画像:</span>
+                    </label>
+                    <input type="file" name="image" accept="image/*" value="{{ $user->image }}" >
+                </div>
                 
                 <div class="form-control my-4">
                     <label for="name" class="label">

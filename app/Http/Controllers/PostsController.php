@@ -15,22 +15,24 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {
-        if (\Auth::check()) {
-            
+        
+        if (\Auth::check()) {   
             // categoryで選択された値を$keywordに格納
             $keyword = $request->input('keyword');
-            
+                
             if ($keyword == null) {
                 $posts = Post::all();
                 return view('posts.index', ['posts' => $posts]);
             }
-            
+                
             $query = Post::query();
-            
+                
             $query->where('section_part', "{$keyword}");
-            
+                
             $posts = $query->get();
             return view('posts.index', compact('posts', 'keyword'));
+        } else {
+            return view('/dashboard');
         }
         
     }
@@ -66,7 +68,6 @@ class PostsController extends Controller
             'music_file' => 'required',
             'content' => 'required|max:255',
         ]);
-        
         
         $file = $request->file('music_file');
         if ($request->hasFile('music_file')) {

@@ -32,9 +32,9 @@
                 
                 <div class="form-control my-4">
                     <label for="music_file" class="label">
-                        <span class="label-text">サンプル音源:</span>
+                        <span class="label-text">サンプル音源(8Mまで):</span>
                     </label>
-                    <input type="file" name="music_file" accept="audio/*"}}">
+                    <input type="file" name="music_file" value="{{ $post->music_file }}" accept="audio/*"">
                 </div>
                 
                 <div class="form-control my-4">

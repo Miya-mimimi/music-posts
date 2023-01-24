@@ -32,7 +32,7 @@
         
         <tr>
             <th>コメント</th>
-            <td>{{ $post->content }}</td>
+            <td style="white-space: pre-wrap;">{{ $post->content }}</td>
         </tr>
     </table>
     

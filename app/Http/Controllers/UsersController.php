@@ -33,20 +33,28 @@ class UsersController extends Controller
     {
         // バリデーション
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|max:15',
         ]);
-        
-        // idの値で投稿を検索して取得
-        $user = User::findOrFail($id);
-        
-        //　投稿を更新
-        $user->name = $request->name;
-        $user->twitter_account = $request->twitter_account;
-        $user->discord_account = $request->discord_account;
-        $user->self_introduction = $request->self_introduction;
-        $user->save();
-        
-        // トップページへリダイレクトさせる
-        return redirect('/dashboard');
+        if (\Auth::id()) {
+            $user = User::findOrFail($id);
+            
+            $image_file = $request->file('image');
+            if ($request->hasFile('image')) {
+                $image_path = \Storage::put('/public', $image_file);
+                $image = explode('/', $image_path)[1];
+            } else {
+                $image = null;
+            }
+            
+            $user->image = $image;
+            $user->name = $request->name;
+            $user->twitter_account = $request->twitter_account;
+            $user->discord_account = $request->discord_account;
+            $user->self_introduction = $request->self_introduction;
+            $user->save();
+            
+            // トップページへリダイレクトさせる
+            return redirect('/dashboard');
+        }
     }
 }

@@ -17,22 +17,36 @@
         <table class="table table-fixed table-zebra w-full my-4">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>ユーザー名</th>
+                    
+                    <th>ユーザー</th>
                     <th>募集パート</th>
                     <th>納期</th>
                     <th>コメント</th>
+                    <th></th>
                     <th style="width: 350px;">サンプル音源</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($posts as $post)
                 <tr>
-                    <td><a class="link link-hover text-info" href="{{ route('posts.show', $post->id) }}">{{ $post->id }}</a></td>
-                    <td><a class="link link-hover text-info" href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a></td>
+                    <td>
+                        <a class="flex link link-hover text-info" href="{{ route('users.show', $post->user->id) }}">
+                            <image style="
+                                width: 50px;
+                                height: 50px;
+                                border-radius: 50%;
+                                object-fit: cover;
+                                " src="{{ asset('storage/'. $post->user->image) }}">
+                            </image>
+                            <div class="ml-2 mt-3">{{ $post->user->name }}</div>
+                        </a>
+                    </td>
                     <td>{{ $post->section_part }}</td>
                     <td>{{ $post->deadline_at }}</td>
                     <td class="w-1 truncate">{{ $post->content }}</td>
+                    <td>
+                        <a class="link link-hover text-info" href="{{ route('posts.show', $post->id) }}">詳細</a>
+                    </td>
                     <td>
                         <audio controls controlslist="nodownload" preload="metadata" src="{{ asset('storage/'. $post->music_file) }}"></audio>
                     </td>

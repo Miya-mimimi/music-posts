@@ -10,8 +10,8 @@
     </tr>
         
     <tr>
-        <th>Twitterアカウント</th>
-        <td>{{ $user->twitter_account }}</td>
+        <th>Twitterリンク</th>
+        <td><a href="{{ $user->twitter_account }}">{{ $user->twitter_account }}</a></td>
     </tr>
         
     <tr>

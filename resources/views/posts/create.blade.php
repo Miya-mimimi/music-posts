@@ -31,17 +31,17 @@
                 
                 <div class="form-control my-4">
                     <label for="music_file" class="label">
-                        <span class="label-text">サンプル音源:</span>
+                        <span class="label-text">サンプル音源(8Mまで):</span>
                     </label>
-                    <input type="file" name="music_file" accept="audio/*" placeholder="サンプル音源をアップロードしてください">
+                    <input type="file" name="music_file" accept="audio/*">
                 </div>
                 
                 <div class="form-control my-4">
                     <label for="content" class="label">
                         <span class="label-text">コメント:</span>
                     </label>
-                    <textarea name="content" placeholder="曲の雰囲気や募集の要望を入力してください。募集パートでその他を選択した場合、具体的に募集パートを記載してください" 
-                           class="input input-bordered h-48 w-full"></textarea>
+                    <textarea name="content" wrap="hard" placeholder="曲の雰囲気や募集の要望を入力してください。募集パートでその他を選択した場合、具体的に募集パートを記載してください" 
+                            class="input input-bordered h-48 w-full"></textarea>
                 </div>
 
             <button type="submit" class="btn btn-primary btn-outline">投稿</button>
