@@ -31,14 +31,16 @@
                 <tr>
                     <td>
                         <a class="flex link link-hover text-info" href="{{ route('users.show', $post->user->id) }}">
-                            <image style="
-                                width: 50px;
-                                height: 50px;
-                                border-radius: 50%;
-                                object-fit: cover;
-                                " src="{{ asset('storage/'. $post->user->image) }}">
-                            </image>
-                            <div class="ml-2 mt-3">{{ $post->user->name }}</div>
+                            @if ($post->user->image == NULL)
+                                <image style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" 
+                                    src="/kkrn_icon_user_3.png">
+                                </image>
+                            @else
+                                <image style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" 
+                                    src="{{ asset('https://musicposts0125.s3.ap-northeast-1.amazonaws.com/'. $post->user->image) }}">
+                                </image>
+                            @endif
+                            <div class="text-left ml-2 mt-3 truncate">{{ $post->user->name }}</div>
                         </a>
                     </td>
                     <td>{{ $post->section_part }}</td>
@@ -48,7 +50,7 @@
                         <a class="link link-hover text-info" href="{{ route('posts.show', $post->id) }}">詳細</a>
                     </td>
                     <td>
-                        <audio controls controlslist="nodownload" preload="metadata" src="{{ asset('storage/'. $post->music_file) }}"></audio>
+                        <audio controls controlslist="nodownload" preload="metadata" src="{{ asset('https://musicposts0125.s3.ap-northeast-1.amazonaws.com/'. $post->music_file) }}"></audio>
                     </td>
                 </tr>
                 @endforeach

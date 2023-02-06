@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
+use Illuminate\Support\Facades\Storage;
+
 class UsersController extends Controller
 {
     public function show($id)
@@ -40,13 +42,11 @@ class UsersController extends Controller
             
             $image_file = $request->file('image');
             if ($request->hasFile('image')) {
-                $image_path = \Storage::put('/public', $image_file);
-                $image = explode('/', $image_path)[1];
-            } else {
-                $image = null;
-            }
+                $image_path = \Storage::disk('s3')->putFile('/public', $image_file, 'public');
+                $user->image = $image_path;
+            } 
             
-            $user->image = $image;
+            
             $user->name = $request->name;
             $user->twitter_account = $request->twitter_account;
             $user->discord_account = $request->discord_account;

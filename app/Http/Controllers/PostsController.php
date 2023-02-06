@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Post;
 
+use Illuminate\Support\Facades\Storage;
+
 class PostsController extends Controller
 {
     /**
@@ -28,7 +30,7 @@ class PostsController extends Controller
             $query = Post::query();
                 
             $query->where('section_part', "{$keyword}");
-                
+            //dd($keyword);
             $posts = $query->get();
             return view('posts.index', compact('posts', 'keyword'));
         } else {
@@ -71,10 +73,8 @@ class PostsController extends Controller
         
         $file = $request->file('music_file');
         if ($request->hasFile('music_file')) {
-            $path = \Storage::put('/public', $file);
-            $music_file = explode('/', $path)[1];
-        } else {
-            $music_file = null;
+            $path = Storage::disk('s3')->putFile('/public', $file, 'public');
+            
         }
         
         
@@ -83,7 +83,7 @@ class PostsController extends Controller
         $request->user()->posts()->create([
             'section_part' => $request->section_part,
             'deadline_at' => $request->deadline_at,
-            'music_file' => $music_file,
+            'music_file' => $path,
             'content' => $request->content,
         ]);
         
@@ -142,26 +142,25 @@ class PostsController extends Controller
         // バリデーション
         $request->validate([
             'deadline_at' => 'required',
-            'music_file' => 'required',
             'content' => 'required|max:255',
         ]);
         
         // idの値で投稿を検索して取得
         $post = Post::findOrFail($id);
         
-        $file = $request->file('music_file');
-        if ($request->hasFile('music_file')) {
-            $path = \Storage::put('/public', $file);
-            $music_file = explode('/', $path)[1];
-        } else {
-            $music_file = null;
-        }
-        
         if (\Auth::id() === $post->user_id) {
+            
+            $file = $request->file('music_file');
+            
+            if ($request->hasFile('music_file')) {
+                $path = Storage::disk('s3')->putFile('/public', $file, 'public');
+                $post->music_file = $path;
+            } 
+        
+        
             //　投稿を更新
             $post->section_part = $request->section_part;
             $post->deadline_at = $request->deadline_at;
-            $post->music_file = $music_file;
             $post->content = $request->content;
             $post->save();
         }

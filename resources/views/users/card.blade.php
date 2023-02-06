@@ -6,7 +6,18 @@
         
     <tr>
         <th>ユーザー名</th>
-        <td>{{ $user->name }}</td>
+        <td class="flex">
+            @if ($user->image == NULL)
+                <image style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" 
+                    src="/kkrn_icon_user_3.png">
+                </image>
+            @else
+                <image style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" 
+                    src="{{ asset('https://musicposts0125.s3.ap-northeast-1.amazonaws.com/'. $user->image) }}">
+                </image>
+            @endif
+            <div class="mt-3 ml-3">{{ $user->name }}</div>
+        </td>
     </tr>
         
     <tr>

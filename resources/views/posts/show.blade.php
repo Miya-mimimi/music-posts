@@ -10,7 +10,22 @@
         
         <tr>
             <th>ユーザー名</th>
-            <td><a class="link link-hover text-info" Href="{{ route('users.show', $post->user->id) }}">{{ $post->user->name }}</a></td>
+            <td>
+                <a class="flex link link-hover text-info" Href="{{ route('users.show', $post->user->id) }}">
+                    @if ($post->user->image == NULL)
+                        <image style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" 
+                            src="/kkrn_icon_user_3.png">
+                        </image>
+                    @else
+                        <image style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;" 
+                            src="{{ asset('https://musicposts0125.s3.ap-northeast-1.amazonaws.com/'. $post->user->image) }}">
+                        </image>
+                    @endif
+                    <div class="mt-3 ml-3">
+                        {{ $post->user->name }}
+                    </div>
+                </a>
+            </td>
         </tr>
         
         <tr>
@@ -26,7 +41,7 @@
         <tr>
             <th>サンプル音源</th>
             <td>
-                <audio controls controlslist="nodownload" preload="metadata" src="{{ asset('storage/'. $post->music_file) }}"></audio>
+                <audio controls controlslist="nodownload" preload="metadata" src="{{ asset('https://musicposts0125.s3.ap-northeast-1.amazonaws.com/'. $post->music_file) }}"></audio>
             </td>
         </tr>
         

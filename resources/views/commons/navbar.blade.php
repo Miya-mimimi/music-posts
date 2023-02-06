@@ -2,17 +2,24 @@
     <nav class="navbar bg-teal-300 text-neutral-content">
         {{-- トップページへのリンク --}}
         <div class="flex-1">
-            <h1><a class="btn btn-ghost normal-case text-xl" href="/dashboard">クリエイターマッチング</a></h1>
+            <h1><a class="btn btn-ghost normal-case text-xl menu hidden lg:menu-horizontal" href="/dashboard">クリエイターマッチング</a></h1>
+            
+            <a class="btn btn-ghost normal-case text-xl lg:hidden" href="/dashboard">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+                </svg>
+            </a>
+            
             @if (Auth::check())
             <form method="GET" action="{{ route('posts.index') }}" class="flex w-1/4">
                 @csrf
                 
-                <select name="keyword" class="text-black input input-bordered ml-2 w-full">
+                <select name="keyword" class="text-black input input-bordered ml-2">
                     <option value="">すべての募集</option>
-                    <option value="ギター">ギター</option>
-                    <option value="ベース">ベース</option>
-                    <option value="ドラム">ドラム</option>
-                    <option value="その他">その他</option>
+                    <option value="ギター" @if (!empty($keyword)) @if ($keyword == "ギター") selected @endif @endif>ギター</option>
+                    <option value="ベース" @if (!empty($keyword)) @if ($keyword == "ベース") selected @endif @endif>ベース</option>
+                    <option value="ドラム" @if (!empty($keyword)) @if ($keyword == "ドラム") selected @endif @endif>ドラム</option>
+                    <option value="その他" @if (!empty($keyword)) @if ($keyword == "その他") selected @endif @endif>その他</option>
                 </select>
                 
                 <button type="submit" class="btn btn-dark">
@@ -33,7 +40,7 @@
                 <div class="dropdown dropdown-end">
                     <button type="button" tabindex="0" class="btn btn-ghost normal-case font-normal lg:hidden">
                         @if (Auth::check())
-                            {{ Auth::user()->name }}
+                            メニュー
                         @else
                             Guest
                         @endif

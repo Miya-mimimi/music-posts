@@ -22,29 +22,29 @@
                     <label for="name" class="label">
                         <span class="label-text">名前:</span>
                     </label>
-                    <input type="text" name="name" value="{{ $user->name }}" class="input input-bordered w-full">
+                    <input type="text" name="name" value="{{ old('name',$user->name) }}" class="input input-bordered w-full">
                 </div>
                 
                 <div class="form-control my-4">
                     <label for="twitter_account" class="label">
                         <span class="label-text">Twitterアカウント:</span>
                     </label>
-                    <input type="text" name="twitter_account" value="{{ $user->twitter_account }}" placeholder="Twitterアカウントを入力してください" class="input input-bordered w-full">
+                    <input type="text" name="twitter_account" value="{{ old('twitter_account',$user->twitter_account) }}" placeholder="Twitterアカウントを入力してください" class="input input-bordered w-full">
                 </div>
                 
                 <div class="form-control my-4">
                     <label for="discord_account" class="label">
                         <span class="label-text">Discordアカウント:</span>
                     </label>
-                    <input type="text" name="discord_account" value="{{ $user->discord_account }}" placeholder="Discordアカウントを入力してください" class="input input-bordered w-full">
+                    <input type="text" name="discord_account" value="{{ old('discord_account', $user->discord_account) }}" placeholder="Discordアカウントを入力してください" class="input input-bordered w-full">
                 </div>
                 
                 <div class="form-control my-4">
                     <label for="self_introduction" class="label">
                         <span class="label-text">自己紹介:</span>
                     </label>
-                    <textarea name="self_introduction" placeholder="あなたのことを教えてください！" value="{{ $user->self_introduction }}" 
-                           class="input input-bordered h-48 w-full"></textarea>
+                    <textarea name="self_introduction" placeholder="あなたのことを教えてください！" 
+                           class="input input-bordered h-48 w-full">{{ old('self_introduction', $user->self_introduction) }}</textarea>
                 </div>
 
             <button type="submit" class="btn btn-primary btn-outline">更新</button>
